@@ -27,7 +27,7 @@ void Person::set(int n){
 	age = n;
 	}	
 
-/*
+
 int Person::fib(){
 	prev = 1;
 	curr = 1;
@@ -40,14 +40,14 @@ int Person::fib(){
     	}
     	return next;
 	}
-*/	
+	
 
 
 extern "C"{
 	Person* Person_new(int n) {return new Person(n);}
 	int Person_get(Person* person) {return person->get();}
 	
-	//int Person_fib(Person* person) {return person->fib();}
+	int Person_fib(Person* person) {return person->fib();}
 
 
 	void Person_set(Person* person, int n) {person->set(n);}
