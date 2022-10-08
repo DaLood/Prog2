@@ -2,7 +2,7 @@
 from time import perf_counter as pc
 from fib import fib_py, fib_numba
 from person import Person
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 def sek_p(n):
     start = pc()
@@ -31,7 +31,7 @@ def sek_c(n):
 if __name__ == '__main__':
     n1 = range(30,46)
     n2 = range(20,31)
-    n3 = 3
+    n3 = 47
     
     sek_n(0)
 
