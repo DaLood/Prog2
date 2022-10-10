@@ -12,7 +12,8 @@ def sek_p(n):
     return sek, res
 
 
-def sek_n(n):
+def sek_n(
+        ):
     start = pc()
     res = fib_numba(n)
     end = pc()
@@ -67,7 +68,11 @@ if __name__ == '__main__':
     sek_n ,res_n = sek_n(n3)
     sek_c ,res_c = sek_c(n3)
     print(f'For n = {n3} is: \n fib = {res_n} for numba \n fib = {res_c} for c++')
-    #For c++ the numbers got out of int range
-
+    
+    #fib(47) = 2971215073 for numba
+    #fib(47) = -1323752223 for c++
+    
+    #For c++ the numbers get out of int range
+    
         
         
