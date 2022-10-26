@@ -71,11 +71,6 @@ def fib(n):
 
 
 
-
-
-
-
-
 def multiply(m, n):      # Compulsory
     if n == 0:  #Basfall
         return 0

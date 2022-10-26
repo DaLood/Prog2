@@ -1,5 +1,5 @@
 from time import perf_counter as pc
-from Prog2.MA4_Files.Upg1.Higher_order import higher_order
+from Upg1.Higher_order import higher_order
 import concurrent.futures as future
 import random, math
 

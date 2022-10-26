@@ -192,8 +192,8 @@ class LinkedList:
 
         if f is None:
             return result
-        while f.succ:
 
+        while f.succ:
             result.Node(f.data, f.succ)
             f = f.succ
         return result
