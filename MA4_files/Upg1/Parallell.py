@@ -1,5 +1,5 @@
 from time import perf_counter as pc
-from Upg1.Higher_order import higher_order
+from Higher_order import higher_order
 import concurrent.futures as future
 import random, math
 
@@ -38,6 +38,7 @@ if __name__ == "__main__":
 
     with future.ProcessPoolExecutor() as ex:
         results = ex.map(higher_order_2, [n_per for i in range(times)],[d for i in range(times)])
+    print([n_per for i in range(times)],[d for i in range(times)])
 
     V_MC = sum(results) * ((2 * r) ** d) / n_tot
     print(f'Parallelprogrammering: {V_MC}')

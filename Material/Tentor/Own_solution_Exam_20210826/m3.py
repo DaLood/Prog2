@@ -54,12 +54,36 @@ class LinkedList:
         """ Removes all ocurrencies of x in the list """
         self.first = self._remove_all(x, self.first)
 
+    # def _remove_all(self, x, f):
+    #     """ Task A5:
+    #         Remove all x from list starting with node f.
+    #         Return the first node in the remaing list.
+    #     """
+    #     if f == None:
+    #         return None
+    #
+    #     if f.data == x:
+    #         return self._remove_all(x, f.succ)
+    #
+    #     elif f.succ.data == x:
+    #         f.succ = f.succ.succ
+    #         return self._remove_all(x, f.succ)
+    #
+    #     else:
+    #         self._remove_all(x, f.succ)
+    #         return f
+
+    def remove_all(self, x):
+        self.first = self._remove_all(x, self.first)
+
     def _remove_all(self, x, f):
-        """ Task A5:
-            Remove all x from list starting with node f.
-            Return the first node in the remaing list.
-        """
-        pass
+        if f == None:
+            return None
+        elif x == f.data:
+            return self._remove_all(x, f.succ)
+        else:
+            f.succ = self._remove_all(x, f.succ)
+            return f
 
     def insert(self, data, index=0):
         """ B2: Inserts a new node at a specified index """
@@ -102,6 +126,46 @@ class BST:
             result += str(x) + ' '
         return '<' + result + '>'
 
+    # def __eq__(self, other):
+    #     for d in self:
+    #         if other.contains(d) == False:
+    #             return False
+    #
+    #     if self.size() == other.size():
+    #         return True
+    #     else:
+    #         return False
+    #
+    # def size(self):
+    #     return self._size(self.root)
+    #
+    # def _size(self, r):
+    #     if r is None:
+    #         return 0
+    #     else:
+    #         return 1 + self._size(r.left) + self._size(r.right)
+    #
+    #
+    # def contains(self, k):               # Not compulsory
+    #     return self._contains(self.root, k)
+    # def _contains(self, f, k):
+    #     if f is None:
+    #         return False
+    #     elif f.data == k:
+    #         return True
+    #     elif k < f.data:
+    #         return self._contains(f.left,k)
+    #     elif k > f.data:
+    #         return self._contains(f.right,k)
+
+
+
+    def __eq__(self, t):
+        """ A8: Overloading =="""
+        return str(self) == str(t)
+
+
+
     def add(self, x):
         """ Adds a new node to the tree"""
         def _add(x, r):
@@ -122,7 +186,27 @@ class BST:
         """ A7:
             Count the leaves in the subtree with root r
         """
-        pass
+        if r is None:
+            return 0
+
+        elif r.left is None and r.right is None:
+            return 1
+
+        else:
+            return self._count_leaves(r.left) + self._count_leaves(r.right)
+
+    # def _count_leaves(self, r):
+    #     """ A7:
+    #         Count the leaves in the subtree with root r
+    #     """
+    #     if not r:
+    #         return 0
+    #     else:
+    #         if r.left or r.right:
+    #             return self._count_leaves(r.left) + self._count_leaves(r.right)
+    #         else:
+    #             return 1
+
 
 
 def bst_sort(aList):
@@ -136,50 +220,55 @@ def bst_sort(aList):
     return result
 
 
+
+
 def main():
-    print('\nTest run of m3.py')
+    # print('\nTest run of m3.py')
+    #
+    # print('\nTest of A5 (remove_all)')
+    # lst = LinkedList()
+    # for x in (3, 1, 2, 3, 4, 3, 4, 7, 3):
+    #     lst.add_last(x)
+    # print(lst)
+    #
+    # lst.remove_all(3)
+    # print(lst, ' \t Should be (1, 2, 4, 4, 7)')
 
-    print('\nTest of A5 (remove_all)')
-    lst = LinkedList()
-    for x in (3, 1, 2, 3, 4, 3, 4, 7, 3):
-        lst.add_last(x)
-    print(lst)
-
-    lst.remove_all(3)
-    print(lst, ' \t Should be (1, 2, 4, 4, 7)')
-
-    print('\nTest of B2 (insertion at an index)')
-    lst = LinkedList()
-    lst.insert(3)          # <3>
-    lst.insert(5, 1)       # <3, 5>
-    lst.insert(5)          # <5, 3, 5>
-    lst.insert(4, 1)       # <5, 4, 3, 5>
-    print(lst, ' \t Should be (5, 4, 3, 5)')
-    try:
-        lst.insert(1, 99)      # LinkedListError: Index out range: 99
-    except ExamException as e:
-        print(e)
-
-    print('\nTest of A7: Number of leaves')
-    bst = BST([5, 2, 1, 3, 6, 4])
-    print('Number of leaves:', bst.count_leaves(), ' \t Should be 3')
-
-    print("\nTest of A8: == for BST")
+    # print('\nTest of B2 (insertion at an index)')
+    # lst = LinkedList()
+    # lst.insert(3)          # <3>
+    # lst.insert(5, 1)       # <3, 5>
+    # lst.insert(5)          # <5, 3, 5>
+    # lst.insert(4, 1)       # <5, 4, 3, 5>
+    # print(lst, ' \t Should be (5, 4, 3, 5)')
+    # try:
+    #     lst.insert(1, 99)      # LinkedListError: Index out range: 99
+    # except ExamException as e:
+    #     print(e)
+    #
+    # print('\nTest of A7: Number of leaves')
+    # bst = BST([5, 2, 1, 3, 6, 4])
+    # print('Number of leaves:', bst.count_leaves(), ' \t Should be 3')
+    #
+    # print("\nTest of A8: == for BST")
     print(BST() == BST(), ' \t Should be True')
     print(BST([1, 2, 3]) == BST([1, 2, 3]), ' \t Should be True')
     print(BST([2, 1, 3]) == BST([1, 2, 3]), ' \t Should be True')
     print(BST([0, 1, 3]) == BST([1, 2, 3]), ' \t Should be False')
     print(BST([1, 2, 3]) == BST([1, 2]), ' \t Should be False')
-
-    print('\nDemonstration of bst_sort')
-    print(bst_sort([5, 2, 4, 8, 1, 9, 3]))
+    #
+    # print('\nDemonstration of bst_sort')
+    # print(bst_sort([5, 2, 4, 8, 1, 9, 3]))
 
 
 if __name__ == '__main__':
     main()
 
 """\n\nAnswer to task A6 - Complexity of repeated add_last:
-
+    theta(n^2) då 
+    
+    The code starts with an empty list and the list grows for each add_last. The time for
+code is then c*(0 + 1 + 2 + ... + n-1) = c*(n-1)*n which is Theta(n^2)
 
     """
 

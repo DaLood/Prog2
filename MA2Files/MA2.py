@@ -135,6 +135,7 @@ def term(wtok, variables):
             t_var = factor(wtok, variables)
             if t_var == 0:
                 raise EvaluationError('Division by zero')
+
             else:
                 if operation == '//':
                     result = result // t_var
@@ -251,6 +252,7 @@ def main():
         elif wtok.get_current() == 'vars':
             for i in variables:
                 print(f"{i}     : {variables[i]}")
+
 
 
         else:

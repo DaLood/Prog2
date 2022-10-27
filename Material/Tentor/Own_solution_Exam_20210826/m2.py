@@ -105,12 +105,19 @@ def expression(wtok):
 
 def term(wtok):
     result = factor(wtok)
-    while wtok.get_current() in ('*', '/'):
+    while wtok.get_current() in ('*', '/', '%'):
         op = wtok.get_current()
         wtok.next()
         fact = factor(wtok)
         if op == '*':
             result *= fact
+
+        elif op =='%':
+            if fact == 0:
+                raise EvaluationError('Division by zero')
+            else:
+                result %= fact
+
         else:
             try:
                 result /= fact
@@ -175,6 +182,10 @@ def main():
 
             if wtok.get_current() == 'quit':
                 break
+
+            elif wtok.get_current() == 'clear':
+                variables.clear()
+
             else:
                 result = assignment(wtok)
                 if wtok.is_at_end():
