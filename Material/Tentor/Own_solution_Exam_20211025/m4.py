@@ -14,13 +14,16 @@ def dice(n):
 	from random import choice
 	return [choice([1,2,3,4,5,5]) for _ in range(n)]
 
+
 def dice_average():
     import concurrent.futures as future
     times = 20
-    n_per = 100000
-    with future.ProcessPoolExecutor as ex:
-        results = ex.list(map(dice, [n_per for i in range(times)]))
-    return results
+    n_per = 100
+    with future.ProcessPoolExecutor() as ex:
+        results = ex.map(dice, [n_per for i in range(times)])
+
+    x = list(results)
+    return sum(x[0])/len(x[0])
 
 
 
@@ -42,6 +45,8 @@ def main():
     print(dice_average())
     # print('Test of B4 ')
     # thumbnail()
+
+
 
 if __name__ == "__main__":
     main()
