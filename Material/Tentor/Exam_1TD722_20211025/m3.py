@@ -121,9 +121,6 @@ class LinkedList:
         if f is None:
             return self.Node(x,f)
 
-
-
-
         else:
             f.succ = self._append(f.succ,x)
             return f
