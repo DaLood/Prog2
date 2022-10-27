@@ -91,7 +91,26 @@ class LinkedList:
             ExamException if index < 0 or index >= n where n
             is the length of the list.
         """
-        pass
+        if self.first is None:
+            self.first = self.Node(value)
+            return
+
+        tot = len([i for i in self])
+
+        if index+1 > tot or index < 0:
+            raise ExamException(f'Index out of range: {index}')
+
+        f = self.first
+        for x in range(index-1):
+            f = f.succ
+        f.data = value
+
+
+        # raise ExamException(f'Index out of range: {index}')
+
+    def test(self,x):
+        for x in self:
+            print(x)
 
     
     def append(self, x):
@@ -99,7 +118,17 @@ class LinkedList:
         self.first = self._append(self.first, x)
     
     def _append(self, f, x):                               ##### A5
-        pass
+        if f is None:
+            return self.Node(x,f)
+
+
+
+
+        else:
+            f.succ = self._append(f.succ,x)
+            return f
+
+
 
     
 class BST:
@@ -159,12 +188,37 @@ class BST:
             return level + \
                 self._ipl(r.left, level + 1) + \
                 self._ipl(r.right, level + 1)
-    
+
+
+
+    def level(self, f):  # Compulsory alternative 2
+        if f is None:
+            return 0
+        return self._level(self.root, f)
+
+    def _level(self, f, k):
+        if f.key == k:
+            return 1
+        elif k < f.key:
+            return 1 + self._level(f.left, k)
+        elif k > f.key:
+            return 1 + self._level(f.right, k)
+
+
     def is_omorph(self, other_tree):                             #### A8
         """ Returns True if self and other_tree has exactly the
             same structure, regerdless of the key values.
         """
-        pass
+
+
+        lista1 = [self.level(i) for i in self]
+        lista2 = [other_tree.level(i) for i in other_tree]
+
+        if lista1 == lista2:
+            return True
+        else:
+            return False
+
 
             
     def merge(self, other_bst):                                   #### B3
@@ -187,23 +241,28 @@ def main():
     ll = LinkedList()
     for i in range(5):
         ll.append(i)
-    print('After som appends    : ', ll)
+    print('After some appends    : ', ll)
     ll.append('x')
     print('After one more append: ', ll)
-    
+
+
+
     print('\nUsing index operations:')
     print('=======================')
-    ll = LinkedList([2, 5, 8])
-    print(ll)
-    print(f'll[2]: {ll[2]}')
+    ll = LinkedList([])
+    #
+    # print(ll)
+    # print(f'll[2]: {ll[0]}')
     try:
         ll[0] = 9
+        print(ll)
         ll[2] = 11
         print(ll)
         ll[-1] = 17
     except ExamException as e:
         print(e)
-        
+
+
 
     print('\nTrying is_omorph')
     print('================')
@@ -211,34 +270,52 @@ def main():
     t2 = BST([2,1,3])
     t3 = BST([2,3,1])
     t4 = BST([7,8,9])
-    
+
+
+
+
     print(f't1 and t2: {t1.is_omorph(t2)}')
     print(f't1 and t3: {t1.is_omorph(t3)}')
     print(f't2 and t3: {t2.is_omorph(t3)}')
     print(f't1 and t4: {t1.is_omorph(t4)}')
-    
-    print('\n\nTime measuring for merge')
-    print('========================\n')
-    
-    ################################
-    exit()                         # Remove this line when working with B3
-    ################################
-    
-    print('           Average node height')
-    print('     n   t1     t2     t3     t4')
-    m = 1000
-    for n in (1000, 2000, 4000, 8000, 16000,
-              32000, 64000, 128000, 256000):
-        t1 = random_tree(m)
-        t2 = random_tree(n)
-        h1 = t1.ipl()/m
-        h2 = t2.ipl()/n
-        t1.better_merge(t2)
-        h3 = t1.ipl()/(n+m)
-        t4 = random_tree(n+m)
-        h4 = t4.ipl()/(n+m)
-        print(f'{n:6d} {h1:5.1f}, {h2:5.1f}, {h3:5.1f}, {h4:5.1f}')
+
+    # print('\n\nTime measuring for merge')
+    # print('========================\n')
+    #
+    # ################################
+    # exit()                         # Remove this line when working with B3
+    # ################################
+    #
+    # print('           Average node height')
+    # print('     n   t1     t2     t3     t4')
+    # m = 1000
+    # for n in (1000, 2000, 4000, 8000, 16000,
+    #           32000, 64000, 128000, 256000):
+    #     t1 = random_tree(m)
+    #     t2 = random_tree(n)
+    #     h1 = t1.ipl()/m
+    #     h2 = t2.ipl()/n
+    #     t1.better_merge(t2)
+    #     h3 = t1.ipl()/(n+m)
+    #     t4 = random_tree(n+m)
+    #     h4 = t4.ipl()/(n+m)
+    #     print(f'{n:6d} {h1:5.1f}, {h2:5.1f}, {h3:5.1f}, {h4:5.1f}')
 
 
 if __name__ == '__main__':
     main()
+"""
+Answer to A6:
+Using append in the __init__-file will cause each addition of element to start
+from the beginning of the list and pass all already added elements.
+The method will then have the complexity
+c(0 + 1 + 2 + 3 + 4 + ... + n-1) which is Theta(n^2)
+
+The first implementation kept track of the last added value so it does not
+have to start from the beginning. The complexity will then be Theta(n)
+
+
+
+Answer to B3:
+
+"""

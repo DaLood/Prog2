@@ -10,7 +10,7 @@ x/2 + x             # 3.0
 -|3 - y*z|          # -3.0
 ||-3-4| - |-10=x||  # 3.0
 x                   # -10.0
-|+|                  # Syntax error 
+|+|                  # Syntax error
 -|2-3-4 x           # Syntax error
 
 #### A4: The **-operator
@@ -23,8 +23,8 @@ x                   # -10.0
 (-1)**(-2)          # 1.0
 2****3              # Syntax error expected
 0**1                # 0.0
-0**0                # Evaluation error 
-0**-1               # Evaluation error 
+0**0                # Evaluation error
+0**-1               # Evaluation error
 (-2)**0             # 1.0
 4**0.5              # 2.0
 (-4)**0.5           # Evaluation error
@@ -34,6 +34,6 @@ x                   # -10.0
 1 = x                 # 1.0
 (99 = x y)            # Syntax error
 x                     # 1.0
-(9=x) + 3*(1 + 0**0)  # Evaluation erroe
-x                     # 1.0 
+(9=x) + 3*(1 + 0**0)  # Evaluation error
+x                     # 1.0
 

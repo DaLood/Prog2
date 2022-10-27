@@ -89,7 +89,7 @@ class LinkedList:
     
     def _append(self, f, x):                               ##### A5
         if f == None:
-            return self.Node(x)
+            return self.Node(x,f)
         else:
             f.succ = self._append(f.succ, x)
             return f                                       # Do not forget this! A common problem...
@@ -211,39 +211,39 @@ def main():
     except ExamException as e:
         print(e)
         
-
-    print('\nTrying is_omorph')
-    print('================')
-    t1 = BST([1,2,3])
-    t2 = BST([2,1,3])
-    t3 = BST([2,3,1])
-    t4 = BST([7,8,9])
-    
-    print(f't1 and t2: {t1.is_omorph(t2)}')
-    print(f't1 and t3: {t1.is_omorph(t3)}')
-    print(f't2 and t3: {t2.is_omorph(t3)}')
-    print(f't1 and t4: {t1.is_omorph(t4)}')
-    
-    print('\n\nTime measuring for merge')
-    print('========================\n')
-    
-    #exit()                         # Remove this line when working with B3
-
-    print('           Average node height')
-    print('     n   t1     t2     t3     t4')
-    m = 1000
-    for n in (1000, 2000, 4000, 8000, 16000,
-              32000, 64000, 128000, 256000):
-        t1 = random_tree(m)
-        t2 = random_tree(n)
-        h1 = t1.ipl()/m
-        h2 = t2.ipl()/n
-        t1.better_merge(t2)
-        h3 = t1.ipl()/(n+m)
-        t4 = random_tree(n+m)
-        h4 = t4.ipl()/(n+m)
-        print(f'{n:6d} {h1:5.1f}, {h2:5.1f}, {h3:5.1f}, {h4:5.1f}')
-
+    #
+    # print('\nTrying is_omorph')
+    # print('================')
+    # t1 = BST([1,2,3])
+    # t2 = BST([2,1,3])
+    # t3 = BST([2,3,1])
+    # t4 = BST([7,8,9])
+    #
+    # print(f't1 and t2: {t1.is_omorph(t2)}')
+    # print(f't1 and t3: {t1.is_omorph(t3)}')
+    # print(f't2 and t3: {t2.is_omorph(t3)}')
+    # print(f't1 and t4: {t1.is_omorph(t4)}')
+    #
+    # print('\n\nTime measuring for merge')
+    # print('========================\n')
+    #
+    # #exit()                         # Remove this line when working with B3
+    #
+    # print('           Average node height')
+    # print('     n   t1     t2     t3     t4')
+    # m = 1000
+    # for n in (1000, 2000, 4000, 8000, 16000,
+    #           32000, 64000, 128000, 256000):
+    #     t1 = random_tree(m)
+    #     t2 = random_tree(n)
+    #     h1 = t1.ipl()/m
+    #     h2 = t2.ipl()/n
+    #     t1.better_merge(t2)
+    #     h3 = t1.ipl()/(n+m)
+    #     t4 = random_tree(n+m)
+    #     h4 = t4.ipl()/(n+m)
+    #     print(f'{n:6d} {h1:5.1f}, {h2:5.1f}, {h3:5.1f}, {h4:5.1f}')
+    #
 
 if __name__ == '__main__':
     main()

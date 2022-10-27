@@ -125,6 +125,15 @@ def factor(wtok):
             raise SyntaxError("Expected ')'", wtok)
         else:
             wtok.next()
+
+    elif wtok.get_current() == '|':
+        wtok.next()
+        result = abs(assignment(wtok))
+        if wtok.get_current() != '|':
+            raise SyntaxError("Expected '|'", wtok)
+        else:
+            wtok.next()
+
  
     elif wtok.is_name():
         if wtok.get_current() in variables:
@@ -145,6 +154,18 @@ def factor(wtok):
     else:
         raise SyntaxError(
             "Expected number, word or '('", wtok)
+
+    if wtok.get_current() == '**':
+        wtok.next()
+        op = factor(wtok)
+
+        if result == 0 or op < 0 or op.is_integer() == False or result.is_integer() == False :
+            raise EvaluationError(f'Illegal operation {result}**{op}')
+
+        else:
+            result = result**(op)
+
+
     
     return result
 
