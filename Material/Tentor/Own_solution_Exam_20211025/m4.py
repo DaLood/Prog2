@@ -6,7 +6,7 @@ Solutions to exam tasks for module 4.
 def matrix(x,n):
     """Method that returns a list of lists (with contents of each row of M),
     using a list comprehension"""
-    pass # remove and write your code here
+    return []
 
 # A10
 def dice(n):
