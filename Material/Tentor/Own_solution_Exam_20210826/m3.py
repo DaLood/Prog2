@@ -68,7 +68,6 @@ class LinkedList:
     #     elif f.succ.data == x:
     #         f.succ = f.succ.succ
     #         return self._remove_all(x, f.succ)
-    #
     #     else:
     #         self._remove_all(x, f.succ)
     #         return f
